@@ -23,13 +23,3 @@ export const useAddTask = () => {
     },
   });
 };
-
-export const useDeleteTask = () => {
-  const taskQuery = useTaskQuery();
-
-  return api.task.delete.useMutation({
-    onSuccess: async () => {
-      await taskQuery.refetch();
-    },
-  });
-};

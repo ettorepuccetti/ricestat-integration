@@ -1,9 +1,5 @@
 import { type StateCreator } from "zustand";
-import {
-  type useAddTask,
-  type useDeleteTask,
-  type useTaskQuery,
-} from "./trpcHooks";
+import { type useAddTask, type useTaskQuery } from "./trpcHooks";
 
 export interface Store {
   taskNextIndex: number;
@@ -14,8 +10,6 @@ export interface Store {
   setTaskQuery: (taskQuery: ReturnType<typeof useTaskQuery>) => void;
   addTask: ReturnType<typeof useAddTask> | undefined;
   setAddTask: (addTask: ReturnType<typeof useAddTask>) => void;
-  deleteTask: ReturnType<typeof useDeleteTask> | undefined;
-  setDeleteTask: (deleteTask: ReturnType<typeof useDeleteTask>) => void;
 }
 
 export const storeCreator: StateCreator<Store, [], [], Store> = (set) => ({
@@ -27,6 +21,4 @@ export const storeCreator: StateCreator<Store, [], [], Store> = (set) => ({
   setTaskQuery: (taskQuery) => set({ taskQuery }),
   addTask: undefined,
   setAddTask: (addTask) => set({ addTask }),
-  deleteTask: undefined,
-  setDeleteTask: (deleteTask) => set({ deleteTask }),
 });

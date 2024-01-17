@@ -1,8 +1,6 @@
 import Head from "next/head";
-import { AddTask } from "~/components/AddTask";
 import { DataProvider } from "~/components/DataProvider";
 import Header from "~/components/Header";
-import { TaskList } from "~/components/TaskList";
 
 export default function Home() {
   return (
@@ -14,11 +12,6 @@ export default function Home() {
       </Head>
       <DataProvider>
         <Header />
-        <div className="flex h-fit flex-col items-center justify-center gap-2 p-4">
-          <div className="text-center text-xl "> TODOs</div>
-          <TaskList />
-          <AddTask />
-        </div>
       </DataProvider>
     </>
   );
