@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MTO_SchedineRQ xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xsi:schemaLocation="http://ws.webci.it/webci.xsd" Version="1.0" PrimaryLangID="it">
+  <POS>
+    <SOURCE>
+      <RequestorID Type="4" ID="ESTATE-IN" MessagePassword="Prova15636" />
+    </SOURCE>
+    <SOURCE>
+      <RequestorID Type="10" ID="" MessagePassword="" />
+    </SOURCE>
+  </POS>
+  <InserimentoAlloggiati CodiceEsercizio="">
+    <OspiteSingolo Id="290721267">
+      <Ospite Id="290721267" IdCamera="302" TipoAlloggiato="16">
+        <DataDiArrivo>2024-01-16</DataDiArrivo>
+        <DataDiPartenza>2024-01-19</DataDiPartenza>
+        <Provenienza>
+          <Italia CodiceComune="409051037" Provincia="409051002" Stato="100000100" />
+        </Provenienza>
+        <Sesso>"1"</Sesso>
+        <DataDiNascita>1992-08-01</DataDiNascita>
+        <Nascita>
+          <Estero Stato="100000100" />
+        </Nascita>
+        <Cittadinanza Stato="100000100" />
+        <CampiStatistici>
+          <TipoTurismo></TipoTurismo>
+          <MezzoDiTrasporto></MezzoDiTrasporto>
+          <TipoPrenotazione></TipoPrenotazione>
+        </CampiStatistici>
+        <ImpostaDiSoggiorno>
+          <CodiceImpostaSoggiorno></CodiceImpostaSoggiorno>
+          <ValoreImpostaUnitaria>1,5</ValoreImpostaUnitaria>
+          <NottiImponibili>3</NottiImponibili>
+        </ImpostaDiSoggiorno>
+      </Ospite>
+    </OspiteSingolo>
+  </InserimentoAlloggiati>
+</MTO_SchedineRQ>
+<?xml version="1.0" encoding="UTF-8"?>
+<MTO_SchedineRQ xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xsi:schemaLocation="http://ws.webci.it/webci.xsd" Version="1.0" PrimaryLangID="it">
+  <POS>
+    <SOURCE>
+      <RequestorID Type="4" ID="ESTATE-IN" MessagePassword="Prova15636" />
+    </SOURCE>
+    <SOURCE>
+      <RequestorID Type="10" ID="" MessagePassword="" />
+    </SOURCE>
+  </POS>
+  <Aggiornamento CodiceEsercizio="">
+    <Ospite Id="291652209" IdCamera="" TipoAlloggiato="17">
+      <DataDiArrivo>2024-01-12</DataDiArrivo>
+      <DataDiPartenza>2024-01-16</DataDiPartenza>
+      <Provenienza>
+        <Italia CodiceComune="" Provincia="" Stato="100001001" />
+      </Provenienza>
+      <Sesso>"1"</Sesso>
+      <DataDiNascita>1996-01-20</DataDiNascita>
+      <Nascita>
+        <Estero Stato="100001001" />
+      </Nascita>
+      <Cittadinanza Stato="100001001" />
+      <CampiStatistici>
+        <TipoTurismo></TipoTurismo>
+        <MezzoDiTrasporto></MezzoDiTrasporto>
+        <TipoPrenotazione></TipoPrenotazione>
+      </CampiStatistici>
+      <ImpostaDiSoggiorno>
+        <CodiceImpostaSoggiorno></CodiceImpostaSoggiorno>
+        <ValoreImpostaUnitaria>1,5</ValoreImpostaUnitaria>
+        <NottiImponibili>4</NottiImponibili>
+      </ImpostaDiSoggiorno>
+    </Ospite>
+  </Aggiornamento>
+</MTO_SchedineRQ>

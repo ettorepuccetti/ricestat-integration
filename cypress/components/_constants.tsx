@@ -53,11 +53,14 @@ function WrapperComponentForTesting({
   return (
     <main
       className={cn(
-        "bg-background min-h-screen font-sans antialiased flex flex-col",
+        "bg-background min-h-screen font-sans antialiased flex",
         fontSans.variable,
       )}
     >
-      <div className="flex flex-col flex-grow items-center justify-center p-4">
+      <div
+        className="flex flex-col items-center justify-center p-4"
+        style={{ flex: 1 }} // not able to provide it throught tailwind
+      >
         <SessionProvider session={session}>
           <MergedStoreProvider>
             <api.Provider client={trpcClient} queryClient={queryClient}>
