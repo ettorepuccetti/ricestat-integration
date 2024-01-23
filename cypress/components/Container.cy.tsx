@@ -1,13 +1,11 @@
-import { Form } from "~/components/Form";
-import { type XmlRequestInput } from "~/dataModel/request";
+import { Container } from "~/components/Container";
 import { API_URL } from "~/utils/constants";
 import { mountWithContext } from "./_constants";
 
-describe("Form", () => {
+describe("Container", () => {
   it("send api request", () => {
     //given
-    const onFormSumbit = cy.stub().as("onFormSumbit");
-    mountWithContext(<Form onFormSumbit={onFormSumbit} />, null);
+    mountWithContext(<Container />, null);
     cy.intercept("POST", API_URL, { statusCode: 200 }).as("apiRequest");
 
     //when
@@ -17,10 +15,9 @@ describe("Form", () => {
     cy.getByDataTest("submit-button").click();
 
     //then
-    cy.get("@onFormSumbit").should("be.calledOnceWith", {
-      hotelId: "ID123",
-      hotelPassword: "passwd456",
-      xmlFile: new File([], "input.xml"),
-    } as XmlRequestInput);
+    cy.wait("@apiRequest");
+    cy.wait("@apiRequest");
+    cy.getByDataTest("response-text").eq(0).should("have.text", "OK");
+    cy.getByDataTest("response-text").eq(1).should("have.text", "OK");
   });
 });
