@@ -19,10 +19,10 @@ export const Container = (): JSX.Element => {
   }
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="container flex flex-col gap-2">
       <Form onFormSumbit={handleFormSubmit} />
       <div className="flex flex-1 flex-col items-center gap-2">
-        <div className="text-xl text-gray-600">Server response</div>
+        <div className="text-xl font-bold text-gray-500">Server response</div>
         <ShowResponse
           responseInsert={insertResponse}
           responseUpdate={updateResponse}

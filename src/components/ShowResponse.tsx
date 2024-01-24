@@ -15,9 +15,10 @@ export const ShowResponse = ({
   return (
     <>
       <div className="grid grid-cols-2 gap-2">
-        <div>insert: </div>
+        <div className="text-s text-gray-500">insert </div>
         <div data-test="response-text">{responseTextInsert}</div>
-        <div>update: </div>
+
+        <div className="text-s text-gray-500">update </div>
         <div data-test="response-text">{responseTextUpdate}</div>
       </div>
     </>
