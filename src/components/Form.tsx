@@ -30,6 +30,7 @@ export const Form = ({
             Id
           </label>
           <input
+            autoComplete="username"
             data-test="hotel-id"
             className="w-full rounded border-2 border-gray-200 bg-gray-100 px-4 py-2 text-gray-700 hover:bg-gray-200 focus:border-blue-500 focus:bg-white"
             id="inline-full-name"

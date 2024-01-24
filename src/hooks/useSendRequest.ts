@@ -8,7 +8,10 @@ export function useShowResponse(response?: Promise<Response>) {
     setResponseText("Loading...");
     response
       .then((r) => setResponseText(r.statusText))
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        console.log(e);
+        setResponseText("Error");
+      });
   }, [response]);
 
   return responseText;

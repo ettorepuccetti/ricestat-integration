@@ -35,6 +35,10 @@ export function sendApiRequest(xmlBody: string[]) {
   return fetch(API_URL, {
     method: "POST",
     body: xmlBody.join("\n"),
+    headers: {
+      "Content-Type": "application/xml",
+      "Access-Control-Allow-Origin": "*",
+    },
   });
 }
 
