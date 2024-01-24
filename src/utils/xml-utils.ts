@@ -39,6 +39,7 @@ export function sendApiRequest(xmlBody: string[]) {
       "Content-Type": "application/xml",
       "Access-Control-Allow-Origin": "*",
     },
+    mode: "no-cors",
   });
 }
 
