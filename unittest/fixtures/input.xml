@@ -48,7 +48,7 @@
       <RequestorID Type="10" ID="" MessagePassword="" />
     </SOURCE>
   </POS>
-  <Aggiornamento CodiceEsercizio="">
+  <Aggiornamento CodiceEsercizio="052032ALB0113">
     <Ospite Id="291652209" IdCamera="" TipoAlloggiato="17">
       <DataDiArrivo>2024-01-12</DataDiArrivo>
       <DataDiPartenza>2024-01-16</DataDiPartenza>

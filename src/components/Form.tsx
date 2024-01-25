@@ -26,14 +26,13 @@ export const Form = ({
     <div className="flex h-[70vh] items-center justify-center">
       <form className="flex w-full max-w-sm flex-col gap-6" onSubmit={onSubmit}>
         <div>
-          <label className="mb-1 block pr-4 font-bold text-gray-500  ">
-            Id
-          </label>
+          <label className="mb-1 block pr-4 font-bold text-gray-500">Id</label>
           <input
             autoComplete="username"
+            name="username"
+            id="username"
             data-test="hotel-id"
             className="w-full rounded border-2 border-gray-200 bg-gray-100 px-4 py-2 text-gray-700 hover:bg-gray-200 focus:border-blue-500 focus:bg-white"
-            id="inline-full-name"
             type="text"
             onChange={(e) => setHotelId(e.target.value)}
           />
@@ -44,9 +43,10 @@ export const Form = ({
           </label>
           <input
             autoComplete="current-password"
+            name="password"
+            id="password"
             data-test="hotel-password"
             className="w-full rounded border-2 border-gray-200 bg-gray-100 px-4 py-2 text-gray-700  hover:bg-gray-200 focus:border-blue-500 focus:bg-white"
-            id="inline-password"
             type="password"
             onChange={(e) => setHotelPassword(e.target.value)}
           />

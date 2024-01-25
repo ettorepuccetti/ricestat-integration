@@ -1,4 +1,4 @@
-import { useShowResponse } from "~/hooks/useSendRequest";
+import { useShowResponse } from "~/hooks/useShowResponse";
 
 interface ShowResponseProps {
   responseInsert?: Promise<Response>;
