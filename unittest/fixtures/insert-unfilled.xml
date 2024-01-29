@@ -2,12 +2,12 @@
 <MTO_SchedineRQ xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xsi:schemaLocation="http://ws.webci.it/webci.xsd" Version="1.0" PrimaryLangID="it">
   <POS>
-    <SOURCE>
+    <Source>
       <RequestorID Type="4" ID="ESTATE-IN" MessagePassword="Prova15636" />
-    </SOURCE>
-    <SOURCE>
+    </Source>
+    <Source>
       <RequestorID Type="10" ID="" MessagePassword="" />
-    </SOURCE>
+    </Source>
   </POS>
   <InserimentoAlloggiati CodiceEsercizio="">
     <OspiteSingolo Id="290721267">

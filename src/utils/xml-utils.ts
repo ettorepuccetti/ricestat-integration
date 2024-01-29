@@ -2,6 +2,8 @@ import { API_URL } from "./constants";
 
 const XML_FIRST_LINE = `<?xml version="1.0" encoding="UTF-8"?>`;
 const XML_HOTEL_AUTH_LINE = `<RequestorID Type = "10"`;
+const XML_INSERT_HOTEL_CODE_LINE = `<InserimentoAlloggiati CodiceEsercizio=""`;
+const XML_UPDATE_HOTEL_CODE_LINE = `<Aggiornamento CodiceEsercizio=""`;
 
 export function separateInsertUpdateXml(
   xmlInput: string[],
@@ -15,35 +17,59 @@ export function separateInsertUpdateXml(
   return [insertXml, updateXml];
 }
 
+function replaceLineInXml(
+  toReplace: string,
+  replacement: string,
+  xml: string[],
+) {
+  const lineIndex = xml.findIndex((line) =>
+    line.trim().replaceAll(" ", "").startsWith(toReplace.replaceAll(" ", "")),
+  );
+  if (lineIndex !== -1) {
+    xml[lineIndex] = replacement;
+  }
+}
+
 export function fillInPosSection(
   xmlInput: string[],
   hotelId: string,
   hotelPassword: string,
 ): string[] {
-  const posLine = xmlInput.findIndex((line) =>
-    line
-      .trim()
-      .replaceAll(" ", "")
-      .startsWith(XML_HOTEL_AUTH_LINE.replaceAll(" ", "")),
+  replaceLineInXml(
+    XML_HOTEL_AUTH_LINE,
+    `      <RequestorID Type="10" ID="${hotelId}" MessagePassword="${hotelPassword}" />`,
+    xmlInput,
   );
-  xmlInput[posLine] =
-    `<RequestorID Type = "10" ID="${hotelId}" MessagePassword="${hotelPassword}"/>`;
+
+  replaceLineInXml(
+    XML_INSERT_HOTEL_CODE_LINE,
+    `  <InserimentoAlloggiati CodiceEsercizio="${hotelId}">`,
+    xmlInput,
+  );
+
+  replaceLineInXml(
+    XML_UPDATE_HOTEL_CODE_LINE,
+    `  <Aggiornamento CodiceEsercizio="${hotelId}">`,
+    xmlInput,
+  );
+
   return xmlInput;
 }
 
-export function sendApiRequest(xmlBody: string[]) {
-  return fetch(API_URL, {
+export function sendApiRequest(xmlBody: string[]): Promise<Response> {
+  const requestOptions: RequestInit = {
     method: "POST",
-    body: xmlBody.join("\n"),
     headers: {
-      "Content-Type": "application/xml",
-      "Access-Control-Allow-Origin": "*",
+      contentType: "application/xml",
     },
-    mode: "no-cors",
-  });
+    body: xmlBody.join("\n"),
+    redirect: "follow",
+  };
+
+  return fetch(API_URL, requestOptions);
 }
 
-export async function readAndSendXml({
+export async function splitAndFillXml({
   id,
   password,
   xmlFile,
@@ -51,7 +77,7 @@ export async function readAndSendXml({
   id: string;
   password: string;
   xmlFile: File;
-}): Promise<[Response, Response]> {
+}): Promise<[string[], string[]]> {
   // read xml file
   const text = await xmlFile.text();
   const inputLines = text.split("\n");
@@ -61,9 +87,5 @@ export async function readAndSendXml({
   const insertXmlWithPos = fillInPosSection(insertXml, id, password);
   const updateXmlWithPos = fillInPosSection(updateXml, id, password);
 
-  // send the two xml to the api
-  const responseInsert = await sendApiRequest(insertXmlWithPos);
-  const responseUpdate = await sendApiRequest(updateXmlWithPos);
-
-  return [responseInsert, responseUpdate];
+  return [insertXmlWithPos, updateXmlWithPos];
 }

@@ -2,14 +2,14 @@
 <MTO_SchedineRQ xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xsi:schemaLocation="http://ws.webci.it/webci.xsd" Version="1.0" PrimaryLangID="it">
   <POS>
-    <SOURCE>
+    <Source>
       <RequestorID Type="4" ID="ESTATE-IN" MessagePassword="Prova15636" />
-    </SOURCE>
-    <SOURCE>
-      <RequestorID Type="10" ID="" MessagePassword="" />
-    </SOURCE>
+    </Source>
+    <Source>
+      <RequestorID Type="10" ID="052032ALB0113" MessagePassword="Prova15636" />
+    </Source>
   </POS>
-  <Aggiornamento CodiceEsercizio="">
+  <Aggiornamento CodiceEsercizio="052032ALB0113">
     <Ospite Id="291652209" IdCamera="" TipoAlloggiato="17">
       <DataDiArrivo>2024-01-12</DataDiArrivo>
       <DataDiPartenza>2024-01-16</DataDiPartenza>

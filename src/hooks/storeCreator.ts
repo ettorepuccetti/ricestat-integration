@@ -1,5 +1,9 @@
 import { type StateCreator } from "zustand";
-import { type useAddTask, type useTaskQuery } from "./trpcHooks";
+import {
+  type useAddTask,
+  type useSendXml,
+  type useTaskQuery,
+} from "./trpcHooks";
 
 export interface Store {
   taskNextIndex: number;
@@ -10,6 +14,9 @@ export interface Store {
   setTaskQuery: (taskQuery: ReturnType<typeof useTaskQuery>) => void;
   addTask: ReturnType<typeof useAddTask> | undefined;
   setAddTask: (addTask: ReturnType<typeof useAddTask>) => void;
+
+  sendXml: ReturnType<typeof useSendXml> | undefined;
+  setSendXml: (sendXml: ReturnType<typeof useSendXml>) => void;
 }
 
 export const storeCreator: StateCreator<Store, [], [], Store> = (set) => ({
@@ -21,4 +28,7 @@ export const storeCreator: StateCreator<Store, [], [], Store> = (set) => ({
   setTaskQuery: (taskQuery) => set({ taskQuery }),
   addTask: undefined,
   setAddTask: (addTask) => set({ addTask }),
+
+  sendXml: undefined,
+  setSendXml: (sendXml) => set({ sendXml }),
 });

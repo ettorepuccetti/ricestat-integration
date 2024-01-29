@@ -6,12 +6,16 @@ describe("ShowResponse", () => {
     //given
     mountWithContext(
       <ShowResponse
-        responseInsert={
-          new Promise((resolve, _rej) => {
-            resolve({ statusText: "OK" } as Response);
-          })
-        }
-        responseUpdate={Promise.resolve({ statusText: "OK" } as Response)}
+        responseInsert={{
+          responseBody: "OK",
+          responseStatus: 200,
+          responseTextStatus: "OK",
+        }}
+        responseUpdate={{
+          responseBody: "OK",
+          responseStatus: 200,
+          responseTextStatus: "OK",
+        }}
       />,
       null,
     );

@@ -7,19 +7,22 @@ import {
 } from "~/utils/xml-utils";
 import { MOCKED_RESPONSE } from "./mocks/handlers";
 
+const HOTEL_ID = "052032ALB0113";
+const PWD = "Prova15636";
+
 describe("xml-utils", () => {
   const xmlInput = readFileSync("unittest/fixtures/input.xml", "utf-8").split(
     "\n",
   );
 
-  it("separate input xml in Insert and Update section", () => {
+  it("separate input xml in Insert and Update section (unfilled)", () => {
     //given
     const expectedInsertXml = readFileSync(
-      "unittest/fixtures/insert.xml",
+      "unittest/fixtures/insert-unfilled.xml",
       "utf-8",
     ).split("\n");
     const expectedUpdateXml = readFileSync(
-      "unittest/fixtures/update.xml",
+      "unittest/fixtures/update-unfilled.xml",
       "utf-8",
     ).split("\n");
 
@@ -31,14 +34,21 @@ describe("xml-utils", () => {
     expect(updateXml).toEqual(expectedUpdateXml);
   });
 
-  it("fill in POS section the id of the hotel", () => {
+  it("fill in POS section the id of the hotel - insert", () => {
     //when
-    const result = fillInPosSection(xmlInput, "hotelId", "hotelPassword");
+    const xmlInsertUnfilled: string[] = readFileSync(
+      "unittest/fixtures/insert-unfilled.xml",
+      "utf-8",
+    ).split("\n");
+
+    const result: string[] = fillInPosSection(xmlInsertUnfilled, HOTEL_ID, PWD);
 
     //then
-    expect(result[8]).toEqual(
-      `<RequestorID Type = "10" ID="hotelId" MessagePassword="hotelPassword"/>`,
-    );
+    const expected: string[] = readFileSync(
+      "unittest/fixtures/insert-filled.xml",
+      "utf-8",
+    ).split("\n");
+    expect(result).toEqual(expected);
   });
 
   it("make rest api request with xml as body", async () => {

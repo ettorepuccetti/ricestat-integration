@@ -23,3 +23,7 @@ export const useAddTask = () => {
     },
   });
 };
+
+export const useSendXml = () => {
+  return api.sender.sendXml.useMutation();
+};

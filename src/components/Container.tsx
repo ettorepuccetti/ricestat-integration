@@ -1,21 +1,51 @@
 import { useState } from "react";
+import { type z } from "zod";
 import { type XmlRequestInput } from "~/dataModel/request";
-import { readAndSendXml } from "~/utils/xml-utils";
+import { useMergedStoreContext } from "~/hooks/useStoreContext";
+import type { SendXmlOutput } from "~/server/api/routers/sender";
+import { splitAndFillXml } from "~/utils/xml-utils";
 import { Form } from "./Form";
 import { ShowResponse } from "./ShowResponse";
 
+export type SendXmlResponse = z.infer<typeof SendXmlOutput>[0];
+
 export const Container = (): JSX.Element => {
-  const [insertResponse, setInsertResponse] = useState<Promise<Response>>();
-  const [updateResponse, setUpdateResponse] = useState<Promise<Response>>();
+  const [insertResponse, setInsertResponse] = useState<SendXmlResponse>();
+  const [updateResponse, setUpdateResponse] = useState<SendXmlResponse>();
+
+  const sender = useMergedStoreContext((store) => store.sendXml);
 
   async function handleFormSubmit(request: XmlRequestInput) {
-    const response: Promise<[Response, Response]> = readAndSendXml({
-      id: request.hotelId,
-      password: request.hotelPassword,
-      xmlFile: request.xmlFile,
-    });
-    setInsertResponse(response.then((r) => r[0]));
-    setUpdateResponse(response.then((r) => r[1]));
+    const [insertXmlBody, updateXmlBody]: [string[], string[]] =
+      await splitAndFillXml({
+        id: request.hotelId,
+        password: request.hotelPassword,
+        xmlFile: request.xmlFile,
+      });
+
+    if (!sender) return;
+
+    sender
+      .mutateAsync({
+        insertXmlFileBody: insertXmlBody,
+        updateXmlFileBody: updateXmlBody,
+      })
+      .then(([insertXmlResponse, updateXmlResponse]) => {
+        setInsertResponse(insertXmlResponse);
+        setUpdateResponse(updateXmlResponse);
+        console.log("insert response", insertXmlResponse);
+        console.log("update response", updateXmlResponse);
+      })
+      .catch((e) => {
+        const errorResponse: SendXmlResponse = {
+          responseStatus: -1,
+          responseTextStatus: "Error",
+          responseBody: "No text to show",
+        };
+        setInsertResponse(errorResponse);
+        setUpdateResponse(errorResponse);
+        console.log("error response", e);
+      });
   }
 
   return (

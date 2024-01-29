@@ -1,27 +1,27 @@
-import { useShowResponse } from "~/hooks/useShowResponse";
+import { type SendXmlResponse } from "./Container";
 
 interface ShowResponseProps {
-  responseInsert?: Promise<Response>;
-  responseUpdate?: Promise<Response>;
+  responseInsert?: SendXmlResponse;
+  responseUpdate?: SendXmlResponse;
 }
 
 export const ShowResponse = ({
   responseInsert,
   responseUpdate,
 }: ShowResponseProps): JSX.Element => {
-  const responseTextInsert = useShowResponse(responseInsert);
-  const responseTextUpdate = useShowResponse(responseUpdate);
-
   return (
     <>
       <div className="grid grid-cols-2 gap-2">
         <div className="text-s text-gray-500">insert </div>
-        <div data-test="response-text">{responseTextInsert}</div>
+        <div data-test="response-text">
+          {responseInsert?.responseTextStatus}
+        </div>
 
         <div className="text-s text-gray-500">update </div>
-        <div data-test="response-text">{responseTextUpdate}</div>
+        <div data-test="response-text">
+          {responseUpdate?.responseTextStatus}
+        </div>
       </div>
     </>
   );
 };
-3;

@@ -1,12 +1,48 @@
-import { Container } from "~/components/Container";
-import { API_URL } from "~/utils/constants";
+import { useEffect } from "react";
+import { Container, type SendXmlResponse } from "~/components/Container";
+import { useSendXml } from "~/hooks/trpcHooks";
+import { useMergedStoreContext } from "~/hooks/useStoreContext";
 import { mountWithContext } from "./_constants";
 
 describe("Container", () => {
+  const ComponentWrapper = () => {
+    // I cannot mock the trpc mutaion bc I don't know how to specify the returned value.
+    // So I intercept the network request instead.
+    const sendXml = useSendXml();
+    const setSendXml = useMergedStoreContext((store) => store.setSendXml);
+
+    useEffect(() => {
+      setSendXml(sendXml);
+    });
+
+    return <Container />;
+  };
   it("send api request", () => {
+    cy.viewport(500, 720);
+
     //given
-    mountWithContext(<Container />, null);
-    cy.intercept("POST", API_URL, { statusCode: 200 }).as("apiRequest");
+    mountWithContext(<ComponentWrapper />, null);
+
+    cy.intercept("POST", "/api/trpc/sender.sendXml?*", [
+      {
+        result: {
+          data: {
+            json: [
+              {
+                responseBody: "body",
+                responseStatus: 200,
+                responseTextStatus: "OK",
+              },
+              {
+                responseBody: "body",
+                responseStatus: 200,
+                responseTextStatus: "OK",
+              },
+            ] as SendXmlResponse[],
+          },
+        },
+      },
+    ]).as("sendXmlRequest");
 
     //when
     cy.getByDataTest("hotel-id").type("ID123");
@@ -17,8 +53,8 @@ describe("Container", () => {
     cy.getByDataTest("submit-button").click();
 
     //then
-    cy.wait("@apiRequest");
-    cy.wait("@apiRequest");
+    cy.wait("@sendXmlRequest");
+
     cy.getByDataTest("response-text").eq(0).should("have.text", "OK");
     cy.getByDataTest("response-text").eq(1).should("have.text", "OK");
   });
