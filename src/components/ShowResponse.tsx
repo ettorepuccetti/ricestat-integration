@@ -11,7 +11,7 @@ export const ShowResponse = ({
 }: ShowResponseProps): JSX.Element => {
   return (
     <>
-      <div className="grid grid-cols-2 gap-2">
+      <div className="grid grid-cols-2 gap-x-6 gap-y-2">
         <div className="text-s text-gray-500">insert </div>
         <div data-test="response-text">
           {responseInsert?.responseTextStatus}
