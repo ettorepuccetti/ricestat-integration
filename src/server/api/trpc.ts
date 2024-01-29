@@ -14,6 +14,7 @@ import superjson from "superjson";
 import { ZodError } from "zod";
 
 import { db } from "~/server/db";
+import { getServerAuthSession } from "../auth";
 
 /**
  * 1. CONTEXT
@@ -54,7 +55,7 @@ export const createTRPCContext = async (opts: CreateNextContextOptions) => {
   const { req, res } = opts;
 
   // Get the session from the server using the getServerSession wrapper function
-  const session = null; //await getServerAuthSession({ req, res });
+  const session = await getServerAuthSession({ req, res });
 
   return createInnerTRPCContext({
     session,
