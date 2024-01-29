@@ -23,7 +23,7 @@ export const Form = ({
   };
 
   return (
-    <div className="flex h-[70vh] items-center justify-center">
+    <div className="mt-10 flex items-center justify-center">
       <form className="flex w-full max-w-sm flex-col gap-6" onSubmit={onSubmit}>
         <div>
           <label className="mb-1 block pr-4 font-bold text-gray-500">Id</label>
