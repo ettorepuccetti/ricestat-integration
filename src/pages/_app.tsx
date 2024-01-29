@@ -1,5 +1,3 @@
-import { type Session } from "next-auth";
-import { SessionProvider } from "next-auth/react";
 import { type AppType } from "next/app";
 
 import { api, getBaseUrl } from "~/utils/api";
@@ -18,10 +16,7 @@ export const fontSans = FontSans({
   variable: "--font-sans",
 });
 
-const MyApp: AppType<{ session: Session | null }> = ({
-  Component,
-  pageProps: { session, ...pageProps },
-}) => {
+const MyApp: AppType = ({ Component, pageProps }) => {
   const [queryClient] = useState(() => new QueryClient());
   const [trpcClient] = useState(() =>
     api.createClient({
@@ -48,17 +43,15 @@ const MyApp: AppType<{ session: Session | null }> = ({
   return (
     <main
       className={cn(
-        "bg-background min-h-screen font-sans antialiased",
+        "min-h-screen bg-background font-sans antialiased",
         fontSans.variable,
       )}
     >
       <api.Provider client={trpcClient} queryClient={queryClient}>
         <QueryClientProvider client={queryClient}>
-          <SessionProvider session={session}>
-            <MergedStoreProvider>
-              <Component {...pageProps} />
-            </MergedStoreProvider>
-          </SessionProvider>
+          <MergedStoreProvider>
+            <Component {...pageProps} />
+          </MergedStoreProvider>
         </QueryClientProvider>
       </api.Provider>
     </main>

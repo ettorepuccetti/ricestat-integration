@@ -21,7 +21,7 @@ describe("Container", () => {
     cy.viewport(500, 720);
 
     //given
-    mountWithContext(<ComponentWrapper />, null);
+    mountWithContext(<ComponentWrapper />);
 
     cy.intercept("POST", "/api/trpc/sender.sendXml?*", [
       {

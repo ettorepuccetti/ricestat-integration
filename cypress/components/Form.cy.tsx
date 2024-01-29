@@ -7,7 +7,7 @@ describe("Form", () => {
   it("send api request", () => {
     //given
     const onFormSumbit = cy.stub().as("onFormSumbit");
-    mountWithContext(<Form onFormSumbit={onFormSumbit} />, null);
+    mountWithContext(<Form onFormSumbit={onFormSumbit} />);
     cy.intercept("POST", API_URL, { statusCode: 200 }).as("apiRequest");
 
     //when

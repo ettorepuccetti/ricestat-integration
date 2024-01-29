@@ -6,8 +6,6 @@ import {
   type UseTRPCQueryResult,
 } from "@trpc/react-query/shared";
 import { type SinonStub } from "cypress/types/sinon";
-import { type Session } from "next-auth";
-import { SessionProvider } from "next-auth/react";
 import { Inter as FontSans } from "next/font/google";
 import { useState } from "react";
 import superjson from "superjson";
@@ -19,20 +17,10 @@ export const fontSans = FontSans({
   variable: "--font-sans",
 });
 
-export const session: Session = {
-  expires: "2022-10-20T11:00:00.000Z",
-  user: {
-    id: "test",
-    name: "test",
-  },
-};
-
 function WrapperComponentForTesting({
   children,
-  session,
 }: {
   children: React.ReactNode;
-  session: Session | null;
 }) {
   const [queryClient] = useState(
     () =>
@@ -53,7 +41,7 @@ function WrapperComponentForTesting({
   return (
     <main
       className={cn(
-        "bg-background min-h-screen font-sans antialiased flex",
+        "flex min-h-screen bg-background font-sans antialiased",
         fontSans.variable,
       )}
     >
@@ -61,29 +49,20 @@ function WrapperComponentForTesting({
         className="flex flex-col items-center justify-center p-4"
         style={{ flex: 1 }} // not able to provide it throught tailwind
       >
-        <SessionProvider session={session}>
-          <MergedStoreProvider>
-            <api.Provider client={trpcClient} queryClient={queryClient}>
-              <QueryClientProvider client={queryClient}>
-                {children}
-              </QueryClientProvider>
-            </api.Provider>
-          </MergedStoreProvider>
-        </SessionProvider>
+        <MergedStoreProvider>
+          <api.Provider client={trpcClient} queryClient={queryClient}>
+            <QueryClientProvider client={queryClient}>
+              {children}
+            </QueryClientProvider>
+          </api.Provider>
+        </MergedStoreProvider>
       </div>
     </main>
   );
 }
 
-export function mountWithContext(
-  children: React.ReactNode,
-  session: Session | null,
-) {
-  cy.mount(
-    <WrapperComponentForTesting session={session}>
-      {children}
-    </WrapperComponentForTesting>,
-  );
+export function mountWithContext(children: React.ReactNode) {
+  cy.mount(<WrapperComponentForTesting>{children}</WrapperComponentForTesting>);
 }
 
 /**

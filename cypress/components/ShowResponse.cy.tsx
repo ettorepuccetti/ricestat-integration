@@ -17,7 +17,6 @@ describe("ShowResponse", () => {
           responseTextStatus: "OK",
         }}
       />,
-      null,
     );
     //when
     //then
