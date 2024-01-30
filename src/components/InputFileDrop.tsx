@@ -31,14 +31,13 @@ export const InputFileDrop = (props: {
         <div className="flex flex-col items-center justify-center gap-1">
           <FaFolder className="h-8 w-8 text-blue-300" />
           <p className="text-center text-xs font-light text-gray-500">
-            Trasferisci il file qui
+            Trascina il file qui o clicca per selezionarlo
           </p>
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center gap-1">
           <CiFileOn className="h-8 w-8 text-sky-700" />
           <div className="text-center text-xs text-gray-600">
-            {" "}
             {props.file.name}
           </div>
         </div>
