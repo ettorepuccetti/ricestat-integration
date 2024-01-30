@@ -31,7 +31,7 @@ export const InputFileDrop = (props: {
         <div className="flex flex-col items-center justify-center gap-1">
           <FaFolder className="h-8 w-8 text-blue-300" />
           <p className="text-center text-xs font-light text-gray-500">
-            Drag & Drop your file here
+            Trasferisci il file qui
           </p>
         </div>
       ) : (

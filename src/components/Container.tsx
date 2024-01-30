@@ -43,7 +43,7 @@ export const Container = (): JSX.Element => {
       .catch((e) => {
         const errorResponse: SendXmlResponse = {
           responseStatus: -1,
-          responseTextStatus: "Error",
+          responseTextStatus: "Errore",
           responseBody: "No text to show",
         };
         setInsertResponse(errorResponse);
@@ -65,7 +65,9 @@ export const Container = (): JSX.Element => {
         />
       </div>
       <div className="flex flex-1 flex-col items-center gap-2">
-        <div className="text-xl font-bold text-gray-500">Server response</div>
+        <div className="text-xl font-bold text-gray-500">
+          Risposta dal server
+        </div>
         <ShowResponse
           responseInsert={insertResponse}
           responseUpdate={updateResponse}

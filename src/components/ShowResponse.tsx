@@ -12,12 +12,12 @@ export const ShowResponse = ({
   return (
     <>
       <div className="grid grid-cols-2 gap-x-6 gap-y-2">
-        <div className="text-s text-gray-500">insert </div>
+        <div className="text-s text-gray-500">Inserimento </div>
         <div data-test="response-text">
           {responseInsert?.responseTextStatus}
         </div>
 
-        <div className="text-s text-gray-500">update </div>
+        <div className="text-s text-gray-500">Aggiornamento </div>
         <div data-test="response-text">
           {responseUpdate?.responseTextStatus}
         </div>
